@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RCS Display Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="calculator-container">
+    <div class="brand-header">
+        <div class="brand-logo-text">RCS DISPLAY</div>
+        <div class="brand-subtext">Professional LED Configuration Tools</div>
+    </div>
+
+    <div class="content-body">
+        <h2>1. Screen Configuration</h2>
+        <p>Select your hardware and enter desired target screen dimensions (in millimeters).</p>
+
+        <div class="row">
+            <div class="col-half">
+                <div class="form-group">
+                    <label for="cabinetSize">Cabinet Size (W x H mm)</label>
+                    <select id="cabinetSize">
+                        <option value="500x500">500mm x 500mm (Standard)</option>
+                        <option value="500x1000">500mm x 1000mm</option>
+                        <option value="640x480">640mm x 480mm</option>
+                        <option value="960x960">960mm x 960mm</option>
+                        <option value="600x337.5">600mm x 337.5mm (16:9)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-half">
+                <div class="form-group">
+                    <label for="moduleSize">Module Size (W x H mm)</label>
+                    <select id="moduleSize">
+                        <option value="250x250">250mm x 250mm</option>
+                        <option value="192x192">192mm x 192mm</option>
+                        <option value="160x160">160mm x 160mm</option>
+                        <option value="320x160">320mm x 160mm</option>
+                        <option value="150x168.75">150mm x 168.75mm</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-full">
+                <label>Target Screen Size (Width x Height mm)</label>
+                <div class="input-group-dual">
+                    <input type="number" id="screenW" placeholder="Width (mm)" min="1">
+                    <input type="number" id="screenH" placeholder="Height (mm)" min="1">
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-calc" id="calculateBtn">Calculate Components</button>
+
+        <div id="mainResults" class="results-box">
+            <h3>Calculation Results</h3>
+            <div class="result-item">Total Modules Needed: <strong id="resTotalModules">0</strong> (<span id="resModW">0</span> Wide x <span id="resModH">0</span> High)</div>
+            <div class="result-item">Approx. Total SMPS: <strong id="resSmps">0</strong> <small>(Est. 1 per 6 modules)</small></div>
+            <div class="result-item">Approx. Receiver Cards: <strong id="resRc">0</strong> <small>(Est. 1 per Cabinet)</small></div>
+            <div style="margin-top: 15px; border-top: 1px dashed #ccc; padding-top:10px;">
+                <div class="result-item">Actual Final Screen Size: <strong id="resActualSize">0mm x 0mm</strong></div>
+            </div>
+        </div>
+
+
+        <div class="section-divider"></div>
+
+        <h2>2. Double Check (Verify Size)</h2>
+        <p>Enter total module counts below to verify the final screen size based on the <strong>Module Size selected above</strong>.</p>
+
+        <div class="row">
+            <div class="col-full">
+                <label>Enter Total Modules (Width Count x Height Count)</label>
+                <div class="input-group-dual">
+                    <input type="number" id="checkModW" placeholder="Modules Wide (Qty)" min="1">
+                    <input type="number" id="checkModH" placeholder="Modules High (Qty)" min="1">
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-calc btn-verify" id="verifyBtn">Verify Screen Size</button>
+
+        <div id="verifyResults" class="results-box">
+            <h3>Verification Result</h3>
+            <div class="result-item">Based on <span id="verModUsed"></span>mm modules:</div>
+            <div class="result-item">Calculated Screen Size: <strong style="color: var(--brand-accent);" id="verScreenSize">0mm x 0mm</strong></div>
+        </div>
+
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
