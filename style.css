@@ -1,9 +1,19 @@
 :root {
-    --brand-primary: #003366; /* Deep Navy Blue */
-    --brand-accent: #00AEEF; /* Electric Blue */
+    --brand-primary: #003366;
+    --brand-accent: #00AEEF;
     --brand-light: #f4f7f6;
+    --brand-bg-soft: #eef6fc;
     --text-dark: #333;
-    --white: #fff;
+    --text-muted: #666;
+    --white: #ffffff;
+    --border-light: #dceefc;
+}
+
+/* ==============================
+   Base Styles
+================================*/
+* {
+    box-sizing: border-box;
 }
 
 body {
@@ -14,15 +24,32 @@ body {
     color: var(--text-dark);
 }
 
-/* Branding Header */
+/* ==============================
+   Main Container
+================================*/
+.calculator-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+/* ==============================
+   Branding Header
+================================*/
 .brand-header {
-    background: linear-gradient(90deg, var(--brand-primary) 0%, var(--brand-accent) 100%);
+    background: linear-gradient(
+        90deg,
+        var(--brand-primary) 0%,
+        var(--brand-accent) 100%
+    );
     color: var(--white);
     padding: 20px;
-    border-radius: 8px 8px 0 0;
     display: flex;
     align-items: center;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    gap: 15px;
 }
 
 .brand-logo-text {
@@ -30,39 +57,39 @@ body {
     font-weight: 700;
     letter-spacing: 1px;
 }
+
 .brand-subtext {
-    margin-left: 15px;
-    opacity: 0.8;
-    font-weight: 400;
+    font-size: 14px;
+    opacity: 0.85;
 }
 
-/* Main Container */
-.calculator-container {
-    max-width: 900px;
-    margin: 0 auto;
-    background-color: var(--white);
-    border-radius: 8px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-    overflow: hidden;
-}
-
+/* ==============================
+   Content Body
+================================*/
 .content-body {
     padding: 30px;
 }
 
 h2 {
+    margin-top: 0;
     color: var(--brand-primary);
     border-bottom: 2px solid var(--brand-accent);
-    padding-bottom: 10px;
-    margin-top: 0;
+    padding-bottom: 8px;
 }
 
 h3 {
-    color: var(--brand-primary);
     margin-bottom: 15px;
+    color: var(--brand-primary);
 }
 
-/* Grid System */
+p {
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+/* ==============================
+   Grid Layout
+================================*/
 .row {
     display: flex;
     flex-wrap: wrap;
@@ -72,59 +99,68 @@ h3 {
 .col-half {
     flex: 50%;
     padding: 0 10px;
-    box-sizing: border-box;
 }
+
 .col-full {
     flex: 100%;
     padding: 0 10px;
-    box-sizing: border-box;
 }
 
-/* Form Elements */
+/* ==============================
+   Form Elements
+================================*/
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 18px;
 }
 
 label {
     display: block;
-    margin-bottom: 5px;
     font-weight: 500;
+    margin-bottom: 6px;
     color: var(--brand-primary);
 }
 
-select, input[type="number"] {
+select,
+input[type="number"] {
     width: 100%;
     padding: 12px;
-    border: 1px solid #ddd;
+    font-size: 15px;
     border-radius: 4px;
-    font-size: 16px;
-    box-sizing: border-box;
-}
-input[type="number"]:focus, select:focus {
-    border-color: var(--brand-accent);
-    outline: none;
+    border: 1px solid #ddd;
+    transition: all 0.2s ease;
 }
 
+select:focus,
+input[type="number"]:focus {
+    outline: none;
+    border-color: var(--brand-accent);
+    box-shadow: 0 0 0 2px rgba(0, 174, 239, 0.15);
+}
+
+/* Dual input group */
 .input-group-dual {
     display: flex;
     gap: 10px;
 }
+
 .input-group-dual input {
     flex: 1;
 }
 
-/* Buttons */
+/* ==============================
+   Buttons
+================================*/
 .btn-calc {
-    background-color: var(--brand-accent);
-    color: var(--white);
-    border: none;
-    padding: 15px 30px;
-    font-size: 18px;
+    width: 100%;
+    padding: 15px;
+    font-size: 17px;
     font-weight: 700;
     border-radius: 4px;
+    border: none;
     cursor: pointer;
-    width: 100%;
-    transition: background-color 0.3s;
+    background-color: var(--brand-accent);
+    color: var(--white);
+    transition: all 0.25s ease;
 }
 
 .btn-calc:hover {
@@ -135,51 +171,119 @@ input[type="number"]:focus, select:focus {
     background-color: var(--brand-primary);
 }
 
-/* Results Section */
+.btn-verify:hover {
+    background-color: var(--brand-accent);
+}
+
+/* ==============================
+   Results Section
+================================*/
 .results-box {
-    background-color: #eef6fc;
-    border: 1px solid #dceefc;
+    background-color: var(--brand-bg-soft);
+    border: 1px solid var(--border-light);
     padding: 20px;
     border-radius: 6px;
     margin-bottom: 30px;
-    display: none; /* Hidden by default */
+    display: none;
 }
+
 .results-box.active {
     display: block;
-    animation: fadeIn 0.5s;
+    animation: fadeIn 0.4s ease;
 }
 
 .result-item {
-    margin-bottom: 10px;
     font-size: 16px;
-}
-.result-item strong {
-    color: var(--brand-primary);
-    font-size: 18px;
+    margin-bottom: 10px;
 }
 
+.result-item strong {
+    font-size: 18px;
+    color: var(--brand-primary);
+}
+
+/* Divider */
 .section-divider {
     height: 2px;
     background-color: #eee;
-    margin: 30px 0;
+    margin: 35px 0;
 }
 
+/* ==============================
+   Animations
+================================*/
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/* Responsive */
+/* ==============================
+   Responsive Design
+================================*/
 @media (max-width: 768px) {
     .col-half {
         flex: 100%;
     }
+
     .brand-header {
         flex-direction: column;
         align-items: flex-start;
     }
+
     .brand-subtext {
         margin-left: 0;
-        margin-top: 5px;
     }
+}
+/* ==============================
+   Viewing Distance Section
+================================*/
+
+#viewResult {
+    margin-top: 15px;
+}
+
+#viewResult .result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 16px;
+}
+
+#viewResult .result-item strong {
+    font-size: 18px;
+    color: var(--brand-primary);
+}
+
+/* Highlight Suggested Pixel Pitch */
+#suggestedPitch {
+    color: var(--brand-accent);
+    font-weight: 700;
+    font-size: 20px;
+}
+
+/* Input focus improvement for viewing distance */
+#viewDistance:focus,
+#viewUnit:focus {
+    border-color: var(--brand-accent);
+    box-shadow: 0 0 0 2px rgba(0, 174, 239, 0.15);
+}
+
+/* Optional badge-style look for suggestion */
+.view-suggestion {
+    background-color: #e6f7fd;
+    border: 1px dashed var(--brand-accent);
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+#mediaPlayerResult strong {
+    color: var(--brand-accent);
+    font-size: 18px;
 }
