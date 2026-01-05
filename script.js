@@ -12,6 +12,19 @@ function parseDimensionString(str) {
     };
 }
 
+// ================= FORMAT PIXELS FUNCTION =================
+function formatPixels(pixels) {
+    if (pixels >= 1000000) {
+        // Convert to millions (e.g., 1300000 → 1.3 Million)
+        return (pixels / 1000000).toFixed(1) + " Million pixels";
+    } else if (pixels >= 1000) {
+        // Convert to thousands (e.g., 650000 → 650K)
+        return (pixels / 1000).toFixed(0) + "K pixels";
+    } else {
+        return pixels.toLocaleString() + " pixels";
+    }
+}
+
 // =================  PowerConsumption Data =================
 const powerConsumptionData = {
     indoor: {
@@ -43,56 +56,111 @@ const powerConsumptionData = {
     }
 };
 
-// ================= MEDIA PLAYER DATA (ACCURATE NOVASTAR SPECIFICATIONS) =================
+// ================= MEDIA PLAYER DATA (UPDATED - ONLY VX 1.3 & VX1000 Pro) =================
 const mediaPlayerData = [
+    // TB Series (Cloud Based) - Only TB2, TB40, TB60
     {
-        model: "TB1/TB2/TB10",
+        model: "TB2 (Cloud)",
+        series: "TB",
         maxPixels: 650000,
-        maxWidth: 4096,
-        maxHeight: 3840,
-        videoDecoding: "TB1/TB2: 1080P, TB10: 4K"
+        maxWidth: 1920,
+        maxHeight: 1080,
+        videoDecoding: "1080P",
+        cloudBased: true
+    },
+    // VX Series (Non-Cloud Based) - ONLY VX 1.3 & VX1000 Pro
+    {
+        model: "VX 1.3 (Non-Cloud)",
+        series: "VX",
+        maxPixels: 1300000,
+        maxWidth: 3840,
+        maxHeight: 1920,
+        videoDecoding: "HD",
+        cloudBased: false
     },
     {
-        model: "TB30",
-        maxPixels: 650000,
-        maxWidth: 4096,
-        maxHeight: 4096,
-        videoDecoding: "4K"
-    },
-    {
-        model: "TB40",
+        model: "TB40 (Cloud)",
+        series: "TB",
         maxPixels: 1300000,
         maxWidth: 4096,
         maxHeight: 4096,
-        videoDecoding: "4K"
+        videoDecoding: "4K",
+        cloudBased: true
     },
     {
-        model: "TB50",
-        maxPixels: 1300000,
-        maxWidth: 4096,
-        maxHeight: 4096,
-        videoDecoding: "4K"
-    },
-    {
-        model: "TB60",
+        model: "TB60 (Cloud)",
+        series: "TB",
         maxPixels: 2300000,
         maxWidth: 4096,
         maxHeight: 4096,
-        videoDecoding: "4K"
+        videoDecoding: "4K",
+        cloudBased: true
+    },
+    // DSP Series (Non-Cloud Based)
+    {
+        model: "DSP400 Pro (Non-Cloud)",
+        series: "DSP",
+        maxPixels: 2600000,
+        maxWidth: 10240,
+        maxHeight: 8192,
+        videoDecoding: "4K",
+        cloudBased: false
+    },
+    // SMP Pro Series
+    {
+        model: "SMP 4 Pro",
+        series: "SMP",
+        maxPixels: 2600000,
+        maxWidth: 4096,
+        maxHeight: 1920,
+        videoDecoding: "4K",
+        cloudBased: false
     },
     {
-        model: "MCTRL4K",
+        model: "DSP600 Pro (Non-Cloud)",
+        series: "DSP",
+        maxPixels: 3900000,
+        maxWidth: 10240,
+        maxHeight: 8192,
+        videoDecoding: "4K",
+        cloudBased: false
+    },
+    {
+        model: "SMP 6 Pro",
+        series: "SMP",
+        maxPixels: 3900000,
+        maxWidth: 4096,
+        maxHeight: 1920,
+        videoDecoding: "4K",
+        cloudBased: false
+    },
+    {
+        model: "VX1000 Pro (Non-Cloud)",
+        series: "VX",
+        maxPixels: 6500000,
+        maxWidth: 10240,
+        maxHeight: 8192,
+        videoDecoding: "4K",
+        cloudBased: false
+    },
+    // TB Series Higher (Cloud Based)
+    {
+        model: "MCTRL4K (Cloud)",
+        series: "TB",
         maxPixels: 8800000,
         maxWidth: 8192,
         maxHeight: 8192,
-        videoDecoding: "4K UHD, 8K×1K@60Hz max"
+        videoDecoding: "4K UHD, 8K×1K@60Hz",
+        cloudBased: true
     },
     {
-        model: "NovaPro UHD",
+        model: "NovaPro UHD (Cloud)",
+        series: "TB",
         maxPixels: 10400000,
         maxWidth: 8192,
         maxHeight: 8192,
-        videoDecoding: "Up to 8K×1K@60Hz"
+        videoDecoding: "Up to 8K×1K@60Hz",
+        cloudBased: true
     }
 ];
 
@@ -130,22 +198,44 @@ const pixelPitchData = {
 
 let selectedModuleResolution = { w: 0, h: 0 };
 
-// ================= MEDIA PLAYER RECOMMENDATION =================
-function recommendMediaPlayer(totalPixels, resWidth, resHeight) {
-    // Sort through media players from smallest to largest capacity
+// ================= MEDIA PLAYER RECOMMENDATION (RETURNS ALL WITH SAME SMALLEST CAPACITY) =================
+function recommendMediaPlayers(totalPixels, resWidth, resHeight) {
+    // Find the first (smallest) player that can handle the screen
+    let firstMatch = null;
+    
     for (let i = 0; i < mediaPlayerData.length; i++) {
         const player = mediaPlayerData[i];
         
-        // Check if the player can handle the total pixels AND the width AND height
         if (totalPixels <= player.maxPixels && 
             resWidth <= player.maxWidth && 
             resHeight <= player.maxHeight) {
-            return player;
+            firstMatch = player;
+            break; // Found the smallest capacity that works
         }
     }
     
-    // If no match found (screen too large), return the highest spec player
-    return mediaPlayerData[mediaPlayerData.length - 1];
+    // If no match found, return the highest spec player
+    if (!firstMatch) {
+        return [mediaPlayerData[mediaPlayerData.length - 1]];
+    }
+    
+    // Now find ALL players with the SAME capacity as the first match
+    const matchingPlayers = [];
+    const targetCapacity = firstMatch.maxPixels;
+    
+    for (let i = 0; i < mediaPlayerData.length; i++) {
+        const player = mediaPlayerData[i];
+        
+        // Same capacity AND can handle the dimensions
+        if (player.maxPixels === targetCapacity &&
+            totalPixels <= player.maxPixels && 
+            resWidth <= player.maxWidth && 
+            resHeight <= player.maxHeight) {
+            matchingPlayers.push(player);
+        }
+    }
+    
+    return matchingPlayers;
 }
 
 // ================= INSTALL TYPE CHANGE =================
@@ -247,8 +337,8 @@ function calculateMain() {
     const totalMaxKVA = totalMaxKW / powerFactor;
     const totalAvgKVA = totalAvgKW / powerFactor;
 
-    // ================= MEDIA PLAYER RECOMMENDATION =================
-    const recommendedPlayer = recommendMediaPlayer(totalPixels, totalResW, totalResH);
+    // ================= MEDIA PLAYER RECOMMENDATION (ALL WITH SAME CAPACITY) =================
+    const recommendedPlayers = recommendMediaPlayers(totalPixels, totalResW, totalResH);
 
     // ================= OUTPUT =================
     document.getElementById("resTotalModules").innerText = totalModules;
@@ -278,16 +368,40 @@ function calculateMain() {
     document.getElementById("resTotalAvgKVA").innerText = 
         totalAvgKVA.toFixed(2) + " kVA";
 
-    // ================= MEDIA PLAYER OUTPUT =================
-    document.getElementById("resMediaModel").innerText = recommendedPlayer.model;
-    document.getElementById("resMediaPixels").innerText = 
-        recommendedPlayer.maxPixels.toLocaleString() + " pixels";
-    document.getElementById("resMediaWidth").innerText = 
-        recommendedPlayer.maxWidth.toLocaleString() + " px";
-    document.getElementById("resMediaHeight").innerText = 
-        recommendedPlayer.maxHeight.toLocaleString() + " px";
-    document.getElementById("resMediaDecoding").innerText = 
-        recommendedPlayer.videoDecoding;
+    // ================= MEDIA PLAYER OUTPUT (SHOW ALL WITH SAME CAPACITY) =================
+    if (recommendedPlayers.length === 1) {
+        const player = recommendedPlayers[0];
+        document.getElementById("resMediaModel").innerText = player.model;
+        document.getElementById("resMediaPixels").innerText = formatPixels(player.maxPixels);
+        document.getElementById("resMediaWidth").innerText = 
+            player.maxWidth.toLocaleString() + " px";
+        document.getElementById("resMediaHeight").innerText = 
+            player.maxHeight.toLocaleString() + " px";
+        document.getElementById("resMediaDecoding").innerText = 
+            player.videoDecoding;
+    } else {
+        // Multiple players with same capacity - show with OR
+        let modelsText = "";
+        let pixelsText = "";
+        let widthText = "";
+        let heightText = "";
+        let decodingText = "";
+        
+        recommendedPlayers.forEach((player, index) => {
+            const separator = index < recommendedPlayers.length - 1 ? " OR " : "";
+            modelsText += player.model + separator;
+            pixelsText += formatPixels(player.maxPixels) + separator;
+            widthText += player.maxWidth.toLocaleString() + " px" + separator;
+            heightText += player.maxHeight.toLocaleString() + " px" + separator;
+            decodingText += player.videoDecoding + separator;
+        });
+        
+        document.getElementById("resMediaModel").innerText = modelsText;
+        document.getElementById("resMediaPixels").innerText = pixelsText;
+        document.getElementById("resMediaWidth").innerText = widthText;
+        document.getElementById("resMediaHeight").innerText = heightText;
+        document.getElementById("resMediaDecoding").innerText = decodingText;
+    }
 
     document.getElementById("mainResults").classList.add("active");
 
