@@ -455,14 +455,14 @@ function updateCabinetOptions() {
     let allowedOptions = [];
 
     if (installType === "indoor" && indoorType === "COB") {
-        // For indoor COB, show only COB-compatible cabinets + placeholder
+        // For indoor COB, show COB-compatible cabinets + 960x960 (common) + placeholder
         allowedOptions = allCabinetOptions.filter(opt => 
-            opt.group === "placeholder" || opt.group === "cob"
+            opt.group === "placeholder" || opt.group === "cob" || opt.value === "960x960"
         );
     } else if (installType === "indoor" && indoorType === "SMD") {
-        // For indoor SMD, show COB + indoor options + placeholder
+        // For indoor SMD, show COB + indoor + 960x960 (common) + placeholder
         allowedOptions = allCabinetOptions.filter(opt => 
-            opt.group === "placeholder" || opt.group === "cob" || opt.group === "indoor"
+            opt.group === "placeholder" || opt.group === "cob" || opt.group === "indoor" || opt.value === "960x960"
         );
     } else if (installType === "outdoor") {
         // For outdoor, determine which cabinets to show
