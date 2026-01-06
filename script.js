@@ -409,29 +409,103 @@ function calculateMain() {
     document.getElementById("checkModH").value = modH;
 }
 
+// ================= CABINET MAPPING FOR OUTDOOR =================
+const outdoorCabinetsByModule = {
+    "320x160": ["960x1280", "1280x1280", "1280x960", "640x960", "640x1280"],
+    "192x192": ["960x960", "1152x1152", "960x1152", "1152x960"]
+};
+
+// Cabinet mapping by specific pixel pitch and module combination
+const specificCabinetsByPitch = {
+    "P6": {
+        "192x192": ["960x960", "1152x1152", "960x1152", "1152x960"]
+    }
+};
+
+// ================= STORE ALL CABINET OPTIONS =================
+const allCabinetOptions = [
+    { value: "", text: "Select Cabinet Size", group: "placeholder" },
+    { value: "960x1280", text: "960mm x 1280mm (Outdoor 320x160)", group: "outdoor320" },
+    { value: "1280x1280", text: "1280mm x 1280mm (Outdoor 320x160)", group: "outdoor320" },
+    { value: "1280x960", text: "1280mm x 960mm (Outdoor 320x160)", group: "outdoor320" },
+    { value: "640x960", text: "640mm x 960mm (Outdoor 320x160)", group: "outdoor320" },
+    { value: "640x1280", text: "640mm x 1280mm (Outdoor 320x160)", group: "outdoor320" },
+    { value: "960x960", text: "960mm x 960mm (Outdoor & Indoor)", group: "outdoor192" },
+    { value: "1152x1152", text: "1152mm x 1152mm (Outdoor 192x192)", group: "outdoor192" },
+    { value: "960x1152", text: "960mm x 1152mm (Outdoor 192x192)", group: "outdoor192" },
+    { value: "1152x960", text: "1152mm x 960mm (Outdoor 192x192)", group: "outdoor192" },
+    { value: "500x500", text: "500mm x 500mm (Die cast aluminium)", group: "cob", dataCob: "yes" },
+    { value: "640x480", text: "640mm x 480mm (Die cast aluminium)", group: "cob", dataCob: "yes" },
+    { value: "640x640", text: "640mm x 640mm (Die cast aluminium)", group: "cob", dataCob: "yes" },
+    { value: "576x576", text: "576mm x 576mm (Die cast aluminium)", group: "cob", dataCob: "yes" },
+    { value: "600x337.5", text: "600mm x 337.5mm (Die cast aluminium)", group: "cob", dataCob: "yes" },
+    { value: "500x1000", text: "500mm x 1000mm (Indoor)", group: "indoor" }
+];
+
 // ================= Cabinets size =================
 function updateCabinetOptions() {
     const installType = document.getElementById("installType")?.value;
     const indoorType = document.getElementById("indoorType")?.value;
+    const moduleSize = document.getElementById("moduleSize")?.value || "";
+    const pixelPitch = document.getElementById("pixelPitch")?.value || "";
     const cabinetSelect = document.getElementById("cabinetSize");
 
     if (!cabinetSelect) return;
 
-    const options = cabinetSelect.querySelectorAll("option");
+    let allowedOptions = [];
 
-    options.forEach(opt => {
-        if (installType === "indoor" && indoorType === "COB") {
-            opt.style.display = opt.dataset.cob === "yes" ? "block" : "none";
-        } else {
-            opt.style.display = "block";
+    if (installType === "indoor" && indoorType === "COB") {
+        // For indoor COB, show only COB-compatible cabinets + placeholder
+        allowedOptions = allCabinetOptions.filter(opt => 
+            opt.group === "placeholder" || opt.group === "cob"
+        );
+    } else if (installType === "indoor" && indoorType === "SMD") {
+        // For indoor SMD, show COB + indoor options + placeholder
+        allowedOptions = allCabinetOptions.filter(opt => 
+            opt.group === "placeholder" || opt.group === "cob" || opt.group === "indoor"
+        );
+    } else if (installType === "outdoor") {
+        // For outdoor, determine which cabinets to show
+        allowedOptions = [allCabinetOptions[0]]; // Always add placeholder
+
+        let allowedCabinets = [];
+
+        // Check if there's a specific combination (e.g., P6 + 192x192)
+        if (specificCabinetsByPitch[pixelPitch] && specificCabinetsByPitch[pixelPitch][moduleSize]) {
+            allowedCabinets = specificCabinetsByPitch[pixelPitch][moduleSize];
+        } else if (outdoorCabinetsByModule[moduleSize]) {
+            // Otherwise use general module-based mapping
+            allowedCabinets = outdoorCabinetsByModule[moduleSize];
         }
+
+        // Add matching cabinets to allowed options
+        allCabinetOptions.forEach(opt => {
+            if (allowedCabinets.includes(opt.value) || opt.value === "960x960") {
+                if (opt.value !== "") { // Don't add placeholder twice
+                    allowedOptions.push(opt);
+                }
+            }
+        });
+    } else {
+        // Default: show placeholder only
+        allowedOptions = [allCabinetOptions[0]];
+    }
+
+    // Rebuild the select dropdown with only allowed options
+    cabinetSelect.innerHTML = "";
+    allowedOptions.forEach(opt => {
+        const optElement = document.createElement("option");
+        optElement.value = opt.value;
+        optElement.textContent = opt.text;
+        if (opt.dataCob) {
+            optElement.dataset.cob = opt.dataCob;
+        }
+        cabinetSelect.appendChild(optElement);
     });
 
-    if (cabinetSelect.selectedOptions.length) {
-        const sel = cabinetSelect.selectedOptions[0];
-        if (sel.style.display === "none") {
-            cabinetSelect.value = "";
-        }
+    // Clear selection if no valid option is selected
+    if (cabinetSelect.selectedOptions.length === 0 || cabinetSelect.value === "") {
+        cabinetSelect.value = "";
     }
 }
 
@@ -475,4 +549,6 @@ setTimeout(() => {
     document.getElementById("indoorType").addEventListener("change", updatePixelPitchOptions);
     document.getElementById("installType").addEventListener("change", updateCabinetOptions);
     document.getElementById("indoorType").addEventListener("change", updateCabinetOptions);
+    document.getElementById("moduleSize").addEventListener("change", updateCabinetOptions);
+    document.getElementById("pixelPitch").addEventListener("change", updateCabinetOptions);
 }, 0);
