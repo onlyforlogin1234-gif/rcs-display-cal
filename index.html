@@ -48,15 +48,29 @@
                 <div class="form-group">
                     <label for="cabinetSize">Cabinet Size (W x H mm)</label>
                     <select id="cabinetSize">
+                    <option value="">Select Cabinet Size</option>
+                    <!-- Outdoor 320x160 cabinets -->
+                    <option value="960x1280">960mm x 1280mm (Outdoor 320x160)</option>
+                    <option value="1280x1280">1280mm x 1280mm (Outdoor 320x160)</option>
+                    <option value="1280x960">1280mm x 960mm (Outdoor 320x160)</option>
+                    <option value="640x960">640mm x 960mm (Outdoor 320x160)</option>
+                    <option value="640x1280">640mm x 1280mm (Outdoor 320x160)</option>
+                    
+                    <!-- Outdoor 192x192 cabinets -->
+                    <option value="960x960">960mm x 960mm (Outdoor & Indoor)</option>
+                    <option value="1152x1152">1152mm x 1152mm (Outdoor 192x192)</option>
+                    <option value="960x1152">960mm x 1152mm (Outdoor 192x192)</option>
+                    <option value="1152x960">1152mm x 960mm (Outdoor 192x192)</option>
+                    
+                    <!-- Indoor COB cabinets -->
                     <option value="500x500" data-cob="yes">500mm x 500mm (Die cast aluminium)</option>
                     <option value="640x480" data-cob="yes">640mm x 480mm (Die cast aluminium)</option>
                     <option value="640x640" data-cob="yes">640mm x 640mm (Die cast aluminium)</option>
                     <option value="576x576" data-cob="yes">576mm x 576mm (Die cast aluminium)</option>
                     <option value="600x337.5" data-cob="yes">600mm x 337.5mm (Die cast aluminium)</option>
 
-                   <!-- Normal cabinets -->
-                    <option value="500x1000">500mm x 1000mm</option>
-                    <option value="960x960">960mm x 960mm</option>
+                    <!-- Normal indoor cabinets -->
+                    <option value="500x1000">500mm x 1000mm (Indoor)</option>
     </select>
 
                 </div>
@@ -93,7 +107,7 @@
             <div class="result-item">Total Modules Needed: <strong id="resTotalModules">0</strong> (<span id="resModW">0</span> Wide x <span id="resModH">0</span> High)</div>
             
             <div style="margin-top: 15px; border-top: 1px dashed #ccc; padding-top:10px;">
-                <div class="result-item">Cabinet Layout:<strong><span id="resCabW">0</span> W — <span id="resCabH">0</span> H</strong></div>
+                <div class="result-item">Cabinet Layout:<strong><span id="resCabW">0</span> W × <span id="resCabH">0</span> H</strong></div>
                 <div class="result-item">Total Cabinets Used:<strong id="resTotalCabinets">0</strong></div>
                 
                  <div class="result-item">Total Screen Resolution: <strong id="resTotalResolution">0px x 0 px</strong> </div>
