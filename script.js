@@ -28,31 +28,31 @@ function formatPixels(pixels) {
 // =================  PowerConsumption Data =================
 const powerConsumptionData = {
     indoor: {
-        "P1.25":  { max: 586, avg: 195 },
-        "P1.538":  { max: 488, avg: 163 },
-        "P1.839":  { max: 488, avg: 163 },
-        "P2":    { max: 488, avg: 163 },
-        "P2.5":  { max: 488, avg: 163 },
-        "P2.6":  { max: 675, avg: 202 },
-        "P2.9":  { max: 480, avg: 144 },
-        "P3":    { max: 543, avg: 180 },
+        "P1.25": { max: 586, avg: 195 },
+        "P1.538": { max: 488, avg: 163 },
+        "P1.839": { max: 488, avg: 163 },
+        "P2": { max: 488, avg: 163 },
+        "P2.5": { max: 488, avg: 163 },
+        "P2.6": { max: 675, avg: 202 },
+        "P2.9": { max: 480, avg: 144 },
+        "P3": { max: 543, avg: 180 },
         "P3.076": { max: 488, avg: 163 },
         "P3.91": { max: 500, avg: 150 },
-        "P4":    { max: 488, avg: 163 }
+        "P4": { max: 488, avg: 163 }
     },
 
     outdoor: {
-        "P2.5":  { max: 879, avg: 264 },
-        "P2.60":  { max: 675, avg: 202 },
+        "P2.5": { max: 879, avg: 264 },
+        "P2.60": { max: 675, avg: 202 },
         "P3.076": { max: 879, avg: 264 },
         "P3.910": { max: 630, avg: 189 },
-        "P4.810":  { max: 540, avg: 162 },
-        "P4":    { max: 879, avg: 264 },
-        "P5":    { max: 879, avg: 264 },
-        "P6":    { max: 895, avg: 269 },
-        "P6.66":  { max: 879, avg: 264 },
-        "P8":    { max: 879, avg: 264 },
-        "P10":   { max: 645, avg: 195 }
+        "P4.810": { max: 540, avg: 162 },
+        "P4": { max: 879, avg: 264 },
+        "P5": { max: 879, avg: 264 },
+        "P6": { max: 895, avg: 269 },
+        "P6.66": { max: 879, avg: 264 },
+        "P8": { max: 879, avg: 264 },
+        "P10": { max: 645, avg: 195 }
     }
 };
 
@@ -168,31 +168,31 @@ const mediaPlayerData = [
 const pixelPitchData = {
 
     indoor: {
-        "P1.25":  { module: "320x160", res: [256,128] },
-        "P1.538":  { module: "320x160", res: [208,104] },
-        "P1.839":  { module: "320x160", res: [174,87] },
-        "P2":    { module: "320x160", res: [160,80] },
-        "P2.5":  { module: "320x160", res: [128,64] },
-        "P2.6":  { module: "250x250", res: [96,96] },
-        "P2.9":  { module: "250x250", res: [64,64] },
-        "P3":    { module: "192x192", res: [64,64] },
-        "P3.076": { module: "320x160", res: [104,52] },
-        "P3.91": { module: "250x250", res: [64,64] },
-        "P4":    { module: "320x160", res: [80,40] }
+        "P1.25": { module: "320x160", res: [256, 128] },
+        "P1.538": { module: "320x160", res: [208, 104] },
+        "P1.839": { module: "320x160", res: [174, 87] },
+        "P2": { module: "320x160", res: [160, 80] },
+        "P2.5": { module: "320x160", res: [128, 64] },
+        "P2.6": { module: "250x250", res: [96, 96] },
+        "P2.9": { module: "250x250", res: [64, 64] },
+        "P3": { module: "192x192", res: [64, 64] },
+        "P3.076": { module: "320x160", res: [104, 52] },
+        "P3.91": { module: "250x250", res: [64, 64] },
+        "P4": { module: "320x160", res: [80, 40] }
     },
     outdoor: {
-        "P2.5":  { module: "320x160", res: [128,64] },
-        "P2.60":  { module: "250x250", res: [96,96] },
-        "P3":    { module: "192x192", res: [64,64] },
-        "P3.076": { module: "320x160", res: [104,52] },
-        "P3.910": { module: "250x250", res: [64,64] },
-        "P4":    { module: "320x160", res: [80,40] },
-        "P4.810":  { module: "250x250", res: [52,52] },
-        "P5":    { module: "320x160", res: [64,32] },
-        "P6":    { module: "192x192", res: [32,32] },
-        "P6.66":  { module: "320x160", res: [48,24] },
-        "P8":    { module: "320x160", res: [40,20] },
-        "P10":   { module: "320x160", res: [32,16] }
+        "P2.5": { module: "320x160", res: [128, 64] },
+        "P2.60": { module: "250x250", res: [96, 96] },
+        "P3": { module: "192x192", res: [64, 64] },
+        "P3.076": { module: "320x160", res: [104, 52] },
+        "P3.910": { module: "250x250", res: [64, 64] },
+        "P4": { module: "320x160", res: [80, 40] },
+        "P4.810": { module: "250x250", res: [52, 52] },
+        "P5": { module: "320x160", res: [64, 32] },
+        "P6": { module: "192x192", res: [32, 32] },
+        "P6.66": { module: "320x160", res: [48, 24] },
+        "P8": { module: "320x160", res: [40, 20] },
+        "P10": { module: "320x160", res: [32, 16] }
     }
 };
 
@@ -202,39 +202,39 @@ let selectedModuleResolution = { w: 0, h: 0 };
 function recommendMediaPlayers(totalPixels, resWidth, resHeight) {
     // Find the first (smallest) player that can handle the screen
     let firstMatch = null;
-    
+
     for (let i = 0; i < mediaPlayerData.length; i++) {
         const player = mediaPlayerData[i];
-        
-        if (totalPixels <= player.maxPixels && 
-            resWidth <= player.maxWidth && 
+
+        if (totalPixels <= player.maxPixels &&
+            resWidth <= player.maxWidth &&
             resHeight <= player.maxHeight) {
             firstMatch = player;
             break; // Found the smallest capacity that works
         }
     }
-    
+
     // If no match found, return the highest spec player
     if (!firstMatch) {
         return [mediaPlayerData[mediaPlayerData.length - 1]];
     }
-    
+
     // Now find ALL players with the SAME capacity as the first match
     const matchingPlayers = [];
     const targetCapacity = firstMatch.maxPixels;
-    
+
     for (let i = 0; i < mediaPlayerData.length; i++) {
         const player = mediaPlayerData[i];
-        
+
         // Same capacity AND can handle the dimensions
         if (player.maxPixels === targetCapacity &&
-            totalPixels <= player.maxPixels && 
-            resWidth <= player.maxWidth && 
+            totalPixels <= player.maxPixels &&
+            resWidth <= player.maxWidth &&
             resHeight <= player.maxHeight) {
             matchingPlayers.push(player);
         }
     }
-    
+
     return matchingPlayers;
 }
 
@@ -284,7 +284,7 @@ function calculateMain() {
     const screenW = Number(document.getElementById("screenW").value);
     const screenH = Number(document.getElementById("screenH").value);
 
-    if (!screenW || !screenH || !modStr) {
+    if (!modStr) {
         alert("Please fill all required fields!");
         return;
     }
@@ -296,21 +296,24 @@ function calculateMain() {
 
     // Handle cabinet size - either selected or custom
     let cab = { w: 0, h: 0 };
-    
+    let isCustomCabinet = false;
+
     if (cabStr === "custom") {
         // Use custom cabinet dimensions
         const customW = Number(document.getElementById("customCabinetW").value);
         const customH = Number(document.getElementById("customCabinetH").value);
-        
+
         if (!customW || !customH || customW <= 0 || customH <= 0) {
             alert("Please enter valid custom cabinet dimensions!");
             return;
         }
-        
+
         cab = { w: customW, h: customH };
+        isCustomCabinet = true;
     } else if (cabStr) {
         // Use selected cabinet
         cab = parseDimensionString(cabStr);
+        isCustomCabinet = false;
     } else {
         // No cabinet selected and not custom
         alert("Please select a cabinet size or choose 'Custom Cabinet Size'!");
@@ -319,12 +322,27 @@ function calculateMain() {
 
     const mod = parseDimensionString(modStr);
 
-    const modW = Math.ceil(screenW / mod.w);
-    const modH = Math.ceil(screenH / mod.h);
-    const totalModules = modW * modH;
+    let modW, modH, actualW, actualH;
 
-    const actualW = modW * mod.w;
-    const actualH = modH * mod.h;
+    if (isCustomCabinet) {
+        // For custom cabinet: calculate modules that fit in the cabinet
+        modW = Math.floor(cab.w / mod.w);
+        modH = Math.floor(cab.h / mod.h);
+        actualW = modW * mod.w;
+        actualH = modH * mod.h;
+    } else {
+        // For standard cabinet: use target screen size
+        if (!screenW || !screenH) {
+            alert("Please enter target screen size!");
+            return;
+        }
+        modW = Math.ceil(screenW / mod.w);
+        modH = Math.ceil(screenH / mod.h);
+        actualW = modW * mod.w;
+        actualH = modH * mod.h;
+    }
+
+    const totalModules = modW * modH;
 
     // cabinet calculation
     const cabW = Math.ceil(actualW / cab.w);
@@ -376,8 +394,17 @@ function calculateMain() {
     document.getElementById("resCabH").innerText = cabH;
     document.getElementById("resTotalCabinets").innerText = totalCab;
 
-    document.getElementById("resActualSize").innerText =
-        `${actualW}mm x ${actualH}mm`;
+    // Show/hide actual size based on cabinet type
+    const actualSizeRow = document.getElementById("actualSizeRow");
+    if (isCustomCabinet) {
+        // Hide actual size for custom cabinets
+        actualSizeRow.style.display = "none";
+    } else {
+        // Show actual size for standard cabinets
+        actualSizeRow.style.display = "block";
+        document.getElementById("resActualSize").innerText =
+            `${actualW}mm x ${actualH}mm`;
+    }
 
     document.getElementById("resTotalResolution").innerText =
         `${totalResW}px × ${totalResH}px = ${totalPixels.toLocaleString()} px`;
@@ -391,9 +418,9 @@ function calculateMain() {
     document.getElementById("resTotalAvgKW").innerText =
         totalAvgKW.toFixed(2) + " kW";
 
-    document.getElementById("resTotalMaxKVA").innerText = 
+    document.getElementById("resTotalMaxKVA").innerText =
         totalMaxKVA.toFixed(2) + " kVA";
-    document.getElementById("resTotalAvgKVA").innerText = 
+    document.getElementById("resTotalAvgKVA").innerText =
         totalAvgKVA.toFixed(2) + " kVA";
 
     // ================= MEDIA PLAYER OUTPUT (SHOW ALL WITH SAME CAPACITY) =================
@@ -401,11 +428,11 @@ function calculateMain() {
         const player = recommendedPlayers[0];
         document.getElementById("resMediaModel").innerText = player.model;
         document.getElementById("resMediaPixels").innerText = formatPixels(player.maxPixels);
-        document.getElementById("resMediaWidth").innerText = 
+        document.getElementById("resMediaWidth").innerText =
             player.maxWidth.toLocaleString() + " px";
-        document.getElementById("resMediaHeight").innerText = 
+        document.getElementById("resMediaHeight").innerText =
             player.maxHeight.toLocaleString() + " px";
-        document.getElementById("resMediaDecoding").innerText = 
+        document.getElementById("resMediaDecoding").innerText =
             player.videoDecoding;
     } else {
         // Multiple players with same capacity - show with OR
@@ -414,7 +441,7 @@ function calculateMain() {
         let widthText = "";
         let heightText = "";
         let decodingText = "";
-        
+
         recommendedPlayers.forEach((player, index) => {
             const separator = index < recommendedPlayers.length - 1 ? " OR " : "";
             modelsText += player.model + separator;
@@ -423,7 +450,7 @@ function calculateMain() {
             heightText += player.maxHeight.toLocaleString() + " px" + separator;
             decodingText += player.videoDecoding + separator;
         });
-        
+
         document.getElementById("resMediaModel").innerText = modelsText;
         document.getElementById("resMediaPixels").innerText = pixelsText;
         document.getElementById("resMediaWidth").innerText = widthText;
@@ -484,12 +511,12 @@ function updateCabinetOptions() {
 
     if (installType === "indoor" && indoorType === "COB") {
         // For indoor COB, show COB-compatible cabinets + 960x960 (common) + placeholder
-        allowedOptions = allCabinetOptions.filter(opt => 
+        allowedOptions = allCabinetOptions.filter(opt =>
             opt.group === "placeholder" || opt.group === "cob" || opt.value === "960x960"
         );
     } else if (installType === "indoor" && indoorType === "SMD") {
         // For indoor SMD, show COB + indoor + 960x960 (common) + placeholder
-        allowedOptions = allCabinetOptions.filter(opt => 
+        allowedOptions = allCabinetOptions.filter(opt =>
             opt.group === "placeholder" || opt.group === "cob" || opt.group === "indoor" || opt.value === "960x960"
         );
     } else if (installType === "outdoor") {
@@ -545,10 +572,10 @@ function calculateSMPS(totalModules, ledType) {
     // SMPS 60A configuration:
     // Indoor: 8 modules per SMPS
     // Outdoor: 6 modules per SMPS
-    
+
     const modulesPerSMPS = ledType === "indoor" ? 8 : 6;
     const smpsUnits = Math.ceil(totalModules / modulesPerSMPS);
-    
+
     return {
         units: smpsUnits,
         modulesPerUnit: modulesPerSMPS,
@@ -598,14 +625,21 @@ setTimeout(() => {
     document.getElementById("indoorType").addEventListener("change", updateCabinetOptions);
     document.getElementById("moduleSize").addEventListener("change", updateCabinetOptions);
     document.getElementById("pixelPitch").addEventListener("change", updateCabinetOptions);
-    
+
     // Custom cabinet size toggle
-    document.getElementById("cabinetSize").addEventListener("change", function() {
+    document.getElementById("cabinetSize").addEventListener("change", function () {
         const customWrapper = document.getElementById("customCabinetWrapper");
+        const screenSizeNote = document.getElementById("screenSizeNote");
+        const targetScreenLabel = document.getElementById("targetScreenLabel");
+
         if (this.value === "custom") {
             customWrapper.style.display = "block";
+            screenSizeNote.style.display = "block";
+            targetScreenLabel.style.opacity = "0.6";
         } else {
             customWrapper.style.display = "none";
+            screenSizeNote.style.display = "none";
+            targetScreenLabel.style.opacity = "1";
         }
     });
 }, 0);
