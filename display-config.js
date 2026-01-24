@@ -308,6 +308,12 @@ function generateDisplayConfiguration() {
         startingPoint: startingPoint
     };
 
+generatePowerDiagram(
+    parseInt(columns),
+    parseInt(rows)
+);
+
+
     // Format output message
     const message = `
 Display Configuration Generated Successfully!
