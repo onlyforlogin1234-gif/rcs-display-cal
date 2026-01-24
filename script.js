@@ -284,8 +284,8 @@ function calculateMain() {
     const screenW = Number(document.getElementById("screenW").value);
     const screenH = Number(document.getElementById("screenH").value);
 
-    if (!screenW || !screenH || !modStr || !cabStr) {
-        alert("Please fill all fields!");
+    if (!screenW || !screenH || !modStr) {
+        alert("Please fill all required fields!");
         return;
     }
 
@@ -294,8 +294,30 @@ function calculateMain() {
         return;
     }
 
+    // Handle cabinet size - either selected or custom
+    let cab = { w: 0, h: 0 };
+    
+    if (cabStr === "custom") {
+        // Use custom cabinet dimensions
+        const customW = Number(document.getElementById("customCabinetW").value);
+        const customH = Number(document.getElementById("customCabinetH").value);
+        
+        if (!customW || !customH || customW <= 0 || customH <= 0) {
+            alert("Please enter valid custom cabinet dimensions!");
+            return;
+        }
+        
+        cab = { w: customW, h: customH };
+    } else if (cabStr) {
+        // Use selected cabinet
+        cab = parseDimensionString(cabStr);
+    } else {
+        // No cabinet selected and not custom
+        alert("Please select a cabinet size or choose 'Custom Cabinet Size'!");
+        return;
+    }
+
     const mod = parseDimensionString(modStr);
-    const cab = parseDimensionString(cabStr);
 
     const modW = Math.ceil(screenW / mod.w);
     const modH = Math.ceil(screenH / mod.h);
@@ -344,6 +366,12 @@ function calculateMain() {
     document.getElementById("resTotalModules").innerText = totalModules;
     document.getElementById("resModW").innerText = modW;
     document.getElementById("resModH").innerText = modH;
+
+    // ================= SMPS CALCULATION =================
+    const smpsData = calculateSMPS(totalModules, installType);
+    document.getElementById("resSMPSUnits").innerText = smpsData.units;
+    document.getElementById("resSMPSConfig").innerText = smpsData.config;
+
     document.getElementById("resCabW").innerText = cabW;
     document.getElementById("resCabH").innerText = cabH;
     document.getElementById("resTotalCabinets").innerText = totalCab;
@@ -491,6 +519,9 @@ function updateCabinetOptions() {
         allowedOptions = [allCabinetOptions[0]];
     }
 
+    // Always add custom option at the end
+    allowedOptions.push({ value: "custom", text: "⚙️ Custom Cabinet Size", group: "custom" });
+
     // Rebuild the select dropdown with only allowed options
     cabinetSelect.innerHTML = "";
     allowedOptions.forEach(opt => {
@@ -507,6 +538,22 @@ function updateCabinetOptions() {
     if (cabinetSelect.selectedOptions.length === 0 || cabinetSelect.value === "") {
         cabinetSelect.value = "";
     }
+}
+
+// ================= SMPS CALCULATION FUNCTION =================
+function calculateSMPS(totalModules, ledType) {
+    // SMPS 60A configuration:
+    // Indoor: 8 modules per SMPS
+    // Outdoor: 6 modules per SMPS
+    
+    const modulesPerSMPS = ledType === "indoor" ? 8 : 6;
+    const smpsUnits = Math.ceil(totalModules / modulesPerSMPS);
+    
+    return {
+        units: smpsUnits,
+        modulesPerUnit: modulesPerSMPS,
+        config: `${modulesPerSMPS} modules per SMPS (${ledType === "indoor" ? "Indoor" : "Outdoor"})`
+    };
 }
 
 // ================= VERIFY SIZE =================
@@ -551,4 +598,14 @@ setTimeout(() => {
     document.getElementById("indoorType").addEventListener("change", updateCabinetOptions);
     document.getElementById("moduleSize").addEventListener("change", updateCabinetOptions);
     document.getElementById("pixelPitch").addEventListener("change", updateCabinetOptions);
+    
+    // Custom cabinet size toggle
+    document.getElementById("cabinetSize").addEventListener("change", function() {
+        const customWrapper = document.getElementById("customCabinetWrapper");
+        if (this.value === "custom") {
+            customWrapper.style.display = "block";
+        } else {
+            customWrapper.style.display = "none";
+        }
+    });
 }, 0);
