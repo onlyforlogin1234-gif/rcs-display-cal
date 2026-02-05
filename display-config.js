@@ -3,31 +3,31 @@
 // Product specifications from your system
 const displayProductSpecs = {
     indoor: {
-        "P1.25":  { module: "320x160", cabinet: ["960x960"], res: [256,128] },
-        "P1.538":  { module: "320x160", cabinet: ["960x960"], res: [208,104] },
-        "P1.839":  { module: "320x160", cabinet: ["960x960"], res: [174,87] },
-        "P2":    { module: "320x160", cabinet: ["960x960"], res: [160,80] },
-        "P2.5":  { module: "320x160", cabinet: ["960x960"], res: [128,64] },
-        "P2.6":  { module: "250x250", cabinet: ["500x500", "640x480", "640x640", "576x576", "600x337.5"], res: [96,96] },
-        "P2.9":  { module: "250x250", cabinet: ["500x500", "640x480", "640x640", "576x576", "600x337.5"], res: [64,64] },
-        "P3":    { module: "192x192", cabinet: ["960x960"], res: [64,64] },
-        "P3.076": { module: "320x160", cabinet: ["960x960"], res: [104,52] },
-        "P3.91": { module: "250x250", cabinet: ["500x500", "640x480", "640x640", "576x576", "600x337.5"], res: [64,64] },
-        "P4":    { module: "320x160", cabinet: ["960x960"], res: [80,40] }
+        "P1.25": { module: "320x160", cabinet: ["960x960"], res: [256, 128] },
+        "P1.538": { module: "320x160", cabinet: ["960x960"], res: [208, 104] },
+        "P1.839": { module: "320x160", cabinet: ["960x960"], res: [174, 87] },
+        "P2": { module: "320x160", cabinet: ["960x960"], res: [160, 80] },
+        "P2.5": { module: "320x160", cabinet: ["960x960"], res: [128, 64] },
+        "P2.6": { module: "250x250", cabinet: ["500x500", "640x480", "640x640", "576x576", "600x337.5"], res: [96, 96] },
+        "P2.9": { module: "250x250", cabinet: ["500x500", "640x480", "640x640", "576x576", "600x337.5"], res: [64, 64] },
+        "P3": { module: "192x192", cabinet: ["960x960"], res: [64, 64] },
+        "P3.076": { module: "320x160", cabinet: ["960x960"], res: [104, 52] },
+        "P3.91": { module: "250x250", cabinet: ["500x500", "640x480", "640x640", "576x576", "600x337.5"], res: [64, 64] },
+        "P4": { module: "320x160", cabinet: ["960x960"], res: [80, 40] }
     },
     outdoor: {
-        "P2.5":  { module: "320x160", cabinet: ["960x1280", "1280x1280", "1280x960", "640x960", "640x1280"], res: [128,64] },
-        "P2.60":  { module: "250x250", cabinet: ["960x960", "1152x1152", "960x1152", "1152x960"], res: [96,96] },
-        "P3":    { module: "192x192", cabinet: ["960x960", "1152x1152", "960x1152", "1152x960"], res: [64,64] },
-        "P3.076": { module: "320x160", cabinet: ["960x1280", "1280x1280", "1280x960", "640x960", "640x1280"], res: [104,52] },
-        "P3.910": { module: "250x250", cabinet: ["960x960", "1152x1152", "960x1152", "1152x960"], res: [64,64] },
-        "P4":    { module: "320x160", cabinet: ["960x1280", "1280x1280", "1280x960", "640x960", "640x1280"], res: [80,40] },
-        "P4.810":  { module: "250x250", cabinet: ["960x960", "1152x1152", "960x1152", "1152x960"], res: [52,52] },
-        "P5":    { module: "320x160", cabinet: ["960x1280", "1280x1280", "1280x960", "640x960", "640x1280"], res: [64,32] },
-        "P6":    { module: "192x192", cabinet: ["960x960", "1152x1152", "960x1152", "1152x960"], res: [32,32] },
-        "P6.66":  { module: "320x160", cabinet: ["960x1280", "1280x1280", "1280x960", "640x960", "640x1280"], res: [48,24] },
-        "P8":    { module: "320x160", cabinet: ["960x1280", "1280x1280", "1280x960", "640x960", "640x1280"], res: [40,20] },
-        "P10":   { module: "320x160", cabinet: ["960x1280", "1280x1280", "1280x960", "640x960", "640x1280"], res: [32,16] }
+        "P2.5": { module: "320x160", cabinet: ["960x1280", "1280x1280", "1280x960", "640x960", "640x1280"], res: [128, 64] },
+        "P2.60": { module: "250x250", cabinet: ["960x960", "1152x1152", "960x1152", "1152x960"], res: [96, 96] },
+        "P3": { module: "192x192", cabinet: ["960x960", "1152x1152", "960x1152", "1152x960"], res: [64, 64] },
+        "P3.076": { module: "320x160", cabinet: ["960x1280", "1280x1280", "1280x960", "640x960", "640x1280"], res: [104, 52] },
+        "P3.910": { module: "250x250", cabinet: ["960x960", "1152x1152", "960x1152", "1152x960"], res: [64, 64] },
+        "P4": { module: "320x160", cabinet: ["960x1280", "1280x1280", "1280x960", "640x960", "640x1280"], res: [80, 40] },
+        "P4.810": { module: "250x250", cabinet: ["960x960", "1152x1152", "960x1152", "1152x960"], res: [52, 52] },
+        "P5": { module: "320x160", cabinet: ["960x1280", "1280x1280", "1280x960", "640x960", "640x1280"], res: [64, 32] },
+        "P6": { module: "192x192", cabinet: ["960x960", "1152x1152", "960x1152", "1152x960"], res: [32, 32] },
+        "P6.66": { module: "320x160", cabinet: ["960x1280", "1280x1280", "1280x960", "640x960", "640x1280"], res: [48, 24] },
+        "P8": { module: "320x160", cabinet: ["960x1280", "1280x1280", "1280x960", "640x960", "640x1280"], res: [40, 20] },
+        "P10": { module: "320x160", cabinet: ["960x1280", "1280x1280", "1280x960", "640x960", "640x1280"], res: [32, 16] }
     }
 };
 
@@ -53,7 +53,7 @@ const pixelPitchValues = {
 };
 
 // Initialize page navigation
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     setupPageNavigation();
     setupDisplayConfiguration();
 });
@@ -64,13 +64,13 @@ function setupPageNavigation() {
     const pageContents = document.querySelectorAll('.page-content');
 
     navButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             const pageId = this.getAttribute('data-page');
-            
+
             // Remove active from all
             navButtons.forEach(btn => btn.classList.remove('active'));
             pageContents.forEach(page => page.classList.remove('active'));
-            
+
             // Add active to clicked
             this.classList.add('active');
             document.getElementById(pageId).classList.add('active');
@@ -89,7 +89,7 @@ function setupDisplayConfiguration() {
     const displayCabinetSize = document.getElementById('displayCabinetSize');
 
     // LED Type change
-    displayLedType.addEventListener('change', function() {
+    displayLedType.addEventListener('change', function () {
         if (this.value === 'indoor') {
             displayIndoorTypeWrapper.style.display = 'block';
         } else {
@@ -221,7 +221,7 @@ function updateDisplayPreview() {
     for (let i = 0; i < totalModules; i++) {
         const moduleBlock = document.createElement('div');
         moduleBlock.className = 'module-block';
-        
+
         // Use aspect-ratio to maintain proportions without exact sizes
         moduleBlock.style.cssText = `
             background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.05) 100%);
@@ -308,10 +308,144 @@ function generateDisplayConfiguration() {
         startingPoint: startingPoint
     };
 
-generatePowerDiagram(
-    parseInt(columns),
-    parseInt(rows)
-);
+    generatePowerDiagram(parseInt(columns), parseInt(rows));
+}
+
+function generatePowerDiagram(cols, rows) {
+    const svg = document.getElementById("powerDiagram");
+    if (!svg) return;
+
+    // Clear previous drawing
+    svg.innerHTML = '';
+
+    // Get SVG dimensions
+    const width = svg.clientWidth || 800; // default if hidden
+    const height = 350;
+
+    // Calculate module size to fit
+    const padding = 20;
+    const availW = width - (padding * 2);
+    const availH = height - (padding * 2);
+
+    const modW = availW / cols;
+    const modH = availH / rows;
+
+    // Determine size (keep square-ish or proportional, but don't stretch too much)
+    // We'll use the smaller dimension to keep modules uniform
+    const cellSize = Math.min(modW, modH, 60); // Max 60px size
+
+    // Recalculate offsets to center the diagram
+    const gridW = cellSize * cols;
+    const gridH = cellSize * rows;
+    const startX = (width - gridW) / 2;
+    const startY = (height - gridH) / 2;
+
+    // Routing preference (read from inputs)
+    const routing = document.getElementById('displayPowerRouting').value;
+    const isVertical = routing.includes("Vertical");
+
+    // Create defs for arrow marker
+    const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+    const marker = document.createElementNS("http://www.w3.org/2000/svg", "marker");
+    marker.setAttribute("id", "arrowhead");
+    marker.setAttribute("markerWidth", "10");
+    marker.setAttribute("markerHeight", "7");
+    marker.setAttribute("refX", "9");
+    marker.setAttribute("refY", "3.5");
+    marker.setAttribute("orient", "auto");
+    const polygon = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+    polygon.setAttribute("points", "0 0, 10 3.5, 0 7");
+    polygon.setAttribute("fill", "#00ffcc");
+    marker.appendChild(polygon);
+    defs.appendChild(marker);
+    svg.appendChild(defs);
+
+    // Draw Modules
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+            const x = startX + (c * cellSize);
+            const y = startY + (r * cellSize);
+
+            const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            rect.setAttribute("x", x + 2);
+            rect.setAttribute("y", y + 2);
+            rect.setAttribute("width", cellSize - 4);
+            rect.setAttribute("height", cellSize - 4);
+            rect.setAttribute("fill", "none");
+            rect.setAttribute("stroke", "#444");
+            rect.setAttribute("stroke-width", "1");
+            svg.appendChild(rect);
+        }
+    }
+
+    // Draw Wiring Path (Snake Pattern)
+    let pathD = "";
+
+    // Simple Snake Path Logic based on Vertical/Horizontal priority
+    // This is a simplified visual representation
+
+    let prevX = -1, prevY = -1;
+
+    if (isVertical) {
+        // Vertical Snake: Down col 0, Up col 1, Down col 2...
+        for (let c = 0; c < cols; c++) {
+            if (c % 2 === 0) {
+                // Down
+                for (let r = 0; r < rows; r++) {
+                    const cx = startX + (c * cellSize) + (cellSize / 2);
+                    const cy = startY + (r * cellSize) + (cellSize / 2);
+                    if (prevX === -1) {
+                        pathD += `M ${cx} ${cy}`;
+                    } else {
+                        pathD += ` L ${cx} ${cy}`;
+                    }
+                    prevX = cx; prevY = cy;
+                }
+            } else {
+                // Up
+                for (let r = rows - 1; r >= 0; r--) {
+                    const cx = startX + (c * cellSize) + (cellSize / 2);
+                    const cy = startY + (r * cellSize) + (cellSize / 2);
+                    pathD += ` L ${cx} ${cy}`;
+                    prevX = cx; prevY = cy;
+                }
+            }
+        }
+    } else {
+        // Horizontal Snake: Right row 0, Left row 1, Right row 2...
+        for (let r = 0; r < rows; r++) {
+            if (r % 2 === 0) {
+                // Right
+                for (let c = 0; c < cols; c++) {
+                    const cx = startX + (c * cellSize) + (cellSize / 2);
+                    const cy = startY + (r * cellSize) + (cellSize / 2);
+                    if (prevX === -1) {
+                        pathD += `M ${cx} ${cy}`;
+                    } else {
+                        pathD += ` L ${cx} ${cy}`;
+                    }
+                    prevX = cx; prevY = cy;
+                }
+            } else {
+                // Left
+                for (let c = cols - 1; c >= 0; c--) {
+                    const cx = startX + (c * cellSize) + (cellSize / 2);
+                    const cy = startY + (r * cellSize) + (cellSize / 2);
+                    pathD += ` L ${cx} ${cy}`;
+                    prevX = cx; prevY = cy;
+                }
+            }
+        }
+    }
+
+    // Draw the path
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", pathD);
+    path.setAttribute("fill", "none");
+    path.setAttribute("stroke", "#00ffcc");
+    path.setAttribute("stroke-width", "2");
+    path.setAttribute("marker-end", "url(#arrowhead)");
+    svg.appendChild(path);
 
 
     // Format output message
