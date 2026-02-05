@@ -630,3 +630,51 @@ small {
     color: var(--brand-accent);
     font-size: 16px;
 }
+
+/* ================= EMAIL POPUP ================= */
+.email-popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.email-popup-content {
+    background: #fff;
+    padding: 25px;
+    width: 320px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.email-popup-content h3 {
+    margin-bottom: 15px;
+    color: var(--brand-primary);
+}
+
+.email-popup-content input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.email-popup-content button {
+    width: 100%;
+    padding: 12px;
+    background: var(--brand-accent);
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.email-popup-content button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
