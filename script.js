@@ -1,3 +1,17 @@
+
+// ================= EMAIL POPUP CONTROLS =================
+function openEmailPopup() {
+    document.getElementById("emailPopup").style.display = "flex";
+}
+
+function closeEmailPopup() {
+    document.getElementById("emailPopup").style.display = "none";
+    // Clear form fields
+    document.getElementById("leadName").value = "";
+    document.getElementById("leadEmail").value = "";
+}
+
+
 // ================= HELPER =================
 
 function parseDimensionString(str) {
@@ -183,7 +197,6 @@ const pixelPitchData = {
     outdoor: {
         "P2.5": { module: "320x160", res: [128, 64] },
         "P2.60": { module: "250x250", res: [96, 96] },
-        "P3": { module: "192x192", res: [64, 64] },
         "P3.076": { module: "320x160", res: [104, 52] },
         "P3.910": { module: "250x250", res: [64, 64] },
         "P4": { module: "320x160", res: [80, 40] },
@@ -344,6 +357,20 @@ function calculateMain() {
 
     const totalModules = modW * modH;
 
+
+    document.getElementById("mainResults").classList.add("active");
+    setTimeout(() => {
+        document.getElementById("emailPopup").style.display = "flex";
+    }, 500);
+    // ================= EXTRA CALCULATIONS =================
+
+    // Area in square feet
+    const areaSqFt = ((actualW * actualH) / 1000000) * 10.7639;
+
+    // Diagonal in inches
+    const diagonalMm = Math.sqrt(Math.pow(actualW, 2) + Math.pow(actualH, 2));
+    const diagonalInches = diagonalMm / 25.4;
+
     // cabinet calculation
     const cabW = Math.ceil(actualW / cab.w);
     const cabH = Math.ceil(actualH / cab.h);
@@ -396,18 +423,21 @@ function calculateMain() {
 
     // Show/hide actual size based on cabinet type
     const actualSizeRow = document.getElementById("actualSizeRow");
+
+    // Always update the text value so email can read it
+    document.getElementById("resActualSize").innerText =
+        `${actualW}mm x ${actualH}mm`;
+
     if (isCustomCabinet) {
-        // Hide actual size for custom cabinets
+        // Hide actual size row for custom cabinets (but value is set)
         actualSizeRow.style.display = "none";
     } else {
         // Show actual size for standard cabinets
         actualSizeRow.style.display = "block";
-        document.getElementById("resActualSize").innerText =
-            `${actualW}mm x ${actualH}mm`;
     }
 
     document.getElementById("resTotalResolution").innerText =
-        `${totalResW}px × ${totalResH}px = ${totalPixels.toLocaleString()} px`;
+        `${totalResW}px × ${totalResH}px`;
 
     document.getElementById("resPowerMax").innerText = powerData.max;
     document.getElementById("resPowerAvg").innerText = powerData.avg;
@@ -643,3 +673,115 @@ setTimeout(() => {
         }
     });
 }, 0);
+
+function sendCalculationEmail() {
+    const name = document.getElementById("leadName").value;
+    const email = document.getElementById("leadEmail").value;
+
+    if (!name || !email) {
+        alert("Please enter name and email");
+        return;
+    }
+
+    // Helper to clean "1000mm" -> 1000
+    const parseMm = (str) => {
+        if (!str) return 0;
+        return Number(str.replace(/[^\d.]/g, "")) || 0;
+    };
+
+    // Get Actual Size values
+    const actualSizeText = document.getElementById("resActualSize")?.innerText || "";
+    const isCustom = actualSizeText.includes("Custom");
+
+    let actualW = 0, actualH = 0;
+    if (!isCustom && actualSizeText.includes("x")) {
+        const parts = actualSizeText.split("x"); // "3840mm x 2160mm"
+        actualW = parseMm(parts[0]);
+        actualH = parseMm(parts[1]);
+    }
+
+    // Recalculate Area (sq ft) correctly: (mm^2 / 1,000,000) * 10.7639
+    const areaSqFt = ((actualW * actualH) / 1000000) * 10.7639;
+
+    // Recalculate Diagonal (inches): sqrt(w^2 + h^2) / 25.4
+    const diagonalInches = Math.sqrt(Math.pow(actualW, 2) + Math.pow(actualH, 2)) / 25.4;
+
+    // ===== Collect calculated values =====
+    const templateParams = {
+        // Matches your template variables
+        name: name,         // Matches {{name}}
+        title: "LED Display Calculation", // Matches {{title}}
+
+        // Email Address Aliases (The "To Email" field in dashboard MUST match one of these)
+        email: email,
+        user_email: email,
+        to_email: email,
+        reply_to: email,
+
+        to_name: name,      // Common default variable
+
+        led_type: (function () {
+            const type = document.getElementById("installType").value.toUpperCase();
+            if (type === "INDOOR") {
+                return type + " - " + document.getElementById("indoorType").value;
+            }
+            return type;
+        })(),
+        pixel_pitch: document.getElementById("pixelPitch").value,
+        module_size: document.getElementById("moduleSize").value,
+        cabinet_size: document.getElementById("cabinetSize").value,
+        cabinet_layout:
+            document.getElementById("resCabW").innerText +
+            " W × " +
+            document.getElementById("resCabH").innerText +
+            " H",
+
+        screen_size: actualSizeText,
+
+        target_screen: (function () {
+            // Priority 1: Check Target Screen Inputs
+            const w = document.getElementById("screenW").value;
+            const h = document.getElementById("screenH").value;
+            if (w && h) return `${w}mm x ${h}mm`;
+
+            // Priority 2: Check Custom Cabinet Inputs (treat as target if manually entered)
+            const custW = document.getElementById("customCabinetW").value;
+            const custH = document.getElementById("customCabinetH").value;
+            if (custW && custH) return `${custW}mm x ${custH}mm`;
+
+            return "Custom / Not Specified";
+        })(),
+
+        // Aliases for the email template
+        get final_screen_size() { return this.target_screen; },
+        get target_size() { return this.target_screen; },
+        get requested_screen() { return this.target_screen; },
+
+        total_area: areaSqFt.toFixed(2) + " sq ft",
+
+        screen_diagonal: diagonalInches.toFixed(0) + " inches",
+
+        resolution: document.getElementById("resTotalResolution").innerText,
+
+        total_max_kw: document.getElementById("resTotalMaxKW").innerText,
+        total_max_kva: document.getElementById("resTotalMaxKVA").innerText
+    };
+
+    // ===== SEND EMAIL =====
+    emailjs
+        .send(
+            "service_ru0k1zo",
+            "template_fr0xun5",
+            templateParams
+        )
+        .then(
+            function () {
+                alert("✅ Calculation sent successfully!");
+                closeEmailPopup();
+            },
+            function (error) {
+                console.error("EmailJS Error:", error);
+                alert("❌ Failed to send email.\n\nError: " + JSON.stringify(error));
+            }
+        );
+}
